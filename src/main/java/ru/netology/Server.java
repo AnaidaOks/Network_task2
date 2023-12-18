@@ -13,10 +13,18 @@ public class Server {
             PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
         ){
-            System.out.println("Get new connection!");
-            final String conName = reader.readLine();
+            System.out.println("Hello!");
+            writer.println("Write your name:");
+            final String name = reader.readLine();
+            System.out.println(String.format("Hi %s", name));
+            writer.println("Are you child? (yes/no)");
 
-            System.out.println(String.format("Hi %s, your port is %d", conName, clientSocket.getPort()));
+            final String answer = reader.readLine();
+            if("yes".equals(answer)) {
+                System.out.println(String.format("Welcome to the kids area, %s%! Let's play!", name));
+            } else {
+                System.out.println(String.format("Welcome to the adult zone, %s! Have a good rest, or a good working day!", name));
+            }
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
         }
