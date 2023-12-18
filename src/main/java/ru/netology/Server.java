@@ -6,13 +6,13 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Main {
+public class Server {
     public static void main(String[] args) {
-        try(ServerSocket mySocket = new ServerSocket(8080)){
+        try(ServerSocket mySocket = new ServerSocket(8080);
             Socket clientSocket = mySocket.accept();
             PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
+            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
+        ){
             System.out.println("Get new connection!");
             final String conName = reader.readLine();
 
